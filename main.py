@@ -1,16 +1,18 @@
 from flask import Flask, render_template, redirect
 
 from PythonProject19.forms.job import JobForm
-from flask import make_response
+from flask import make_response, jsonify
 from PythonProject19.forms.login import LoginForm
 from PythonProject19.forms.user import RegisterForm
 from flask_login import LoginManager, login_user, login_required, logout_user
 from data.jobs import Jobs
 from data.users import User
+from flask_restful import reqparse, abort, Api, Resource
 
 from data import db_session, jobs_api
 
 app = Flask(__name__)
+api = Api(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 login_manager = LoginManager()
@@ -110,7 +112,11 @@ def not_found(error):
 def bad_request(_):
     return make_response(jsonify({'error': 'Bad Request'}), 400)
 
+# для списка объектов
+api.add_resource(users_resources.NewsListResource, '/api/v2/users')
 
+# для одного объекта
+api.add_resource(users_resources.NewsResource, '/api/v2/users/<int:user_id>')
 
 if __name__ == '__main__':
     app.run(port=8010, host='127.0.0.1')
