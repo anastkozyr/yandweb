@@ -8,6 +8,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user
 from data.jobs import Jobs
 from data.users import User
 from flask_restful import reqparse, abort, Api, Resource
+from data.users_resource import *
 
 from data import db_session, jobs_api
 
@@ -113,10 +114,10 @@ def bad_request(_):
     return make_response(jsonify({'error': 'Bad Request'}), 400)
 
 # для списка объектов
-api.add_resource(users_resources.NewsListResource, '/api/v2/users')
+api.add_resource(UsersListResource, '/api/v2/users')
 
 # для одного объекта
-api.add_resource(users_resources.NewsResource, '/api/v2/users/<int:user_id>')
+api.add_resource(UsersResource, '/api/v2/users/<int:user_id>')
 
 if __name__ == '__main__':
     app.run(port=8010, host='127.0.0.1')

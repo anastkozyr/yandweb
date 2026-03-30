@@ -1,6 +1,6 @@
 import datetime
 
-import serializer
+from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy import orm
 import sqlalchemy
 from flask_login import UserMixin
