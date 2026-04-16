@@ -1,9 +1,9 @@
 from flask import Flask, render_template, redirect
 
-from PythonProject19.forms.job import JobForm
+from forms.job import JobForm
 from flask import make_response, jsonify
-from PythonProject19.forms.login import LoginForm
-from PythonProject19.forms.user import RegisterForm
+from forms.login import LoginForm
+from forms.user import RegisterForm
 from flask_login import LoginManager, login_user, login_required, logout_user
 from data.jobs import Jobs
 from data.users import User
